@@ -1,0 +1,43 @@
+{% extends 'myapp/base.html' %}
+{% block body %}
+    <form method="post" class="shadow-lg m-10">
+        {% csrf_token %}
+        <h1 class="text-3xl font-bold text-center">Edit Expense</h1>
+        <table class="table align-items-center">
+            <thead class="thead-light">
+                <tr>
+                    <th scope="col">
+                       Expense Name
+                    </th>
+                    <th scope="col">
+                       Expense Amount
+                    </th>
+                    <th scope="col">
+                       Expense Category
+                    </th>
+                    <th scope="col">
+                        Edit
+                    </th>
+                </tr>
+            </thead>
+            <tbody class="list">
+                <td class="border rounded-lg py-2 px-3 w-full text-3xl font-bold">
+                    {{ expense_form.name }}
+                </td>
+                <td class="border rounded-lg py-2 px-3 w-full text-3xl font-bold">
+                    {{ expense_form.amount }}
+                </td>
+                <td class="border rounded-lg py-2 px-3 w-full  text-3xl font-bold">
+                    {{ expense_form.category }}
+                </td>
+                <td>
+                    <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold px-6 py-2 h-12 rounded gap-3" type="submit">Edit Expense</button>
+                </td>
+            </tbody>
+        </table>
+
+       
+
+        
+    </form>
+{% endblock %}

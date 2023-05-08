@@ -1,0 +1,381 @@
+{% extends 'myapp/base.html' %}
+{% load static %}
+{% load humanize %}
+{% block body %}
+        <section class='container mx-auto my-12'> 
+            <div class="m-10 font-bold flex justify-start gap-8">
+                <h1 class="text-2xl font-bold">Add Expense</h1>
+                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32"><path fill="#635994" d="M19.05 5.06c0-1.68-1.37-3.06-3.06-3.06s-3.07 1.38-3.06 3.06v7.87H5.06C3.38 12.93 2 14.3 2 15.99c0 1.68 1.38 3.06 3.06 3.06h7.87v7.86c0 1.68 1.37 3.06 3.06 3.06c1.68 0 3.06-1.37 3.06-3.06v-7.86h7.86c1.68 0 3.06-1.37 3.06-3.06c0-1.68-1.37-3.06-3.06-3.06h-7.86V5.06Z"/></svg>
+            </div>
+
+            <form class="  table-responsive" method="post">
+            {% csrf_token %}
+
+            <table class="table align-items-center">
+                <thead class="thead-light">
+                    <tr>
+                        <th scope="col">
+                           Name
+                        </th>
+                        <th scope="col">
+                            Amount
+                        </th>
+                        <th scope="col">
+                            Category
+                        </th>
+                        <th scope="col">
+                            Add
+                        </th>
+                    </tr>
+                </thead>
+                <tbody class="list">
+                    <td>
+                        <input class="border rounded-lg py-2 px-3 w-full" type="text" name="name" required>
+                    </td>
+                    <td>
+                        <input class="border rounded-lg py-2 px-3 w-full" type="number" name="amount" required>
+                    </td>
+                    <td>
+                        <select class="border rounded-lg py-2 px-3 w-full h-10 bg-white" name="category" required>
+                            <option value="" selected disabled>Select a category</option>
+                            <option value="food">Food</option>
+                            <option value="utilities">Utilities</option>
+                            <option value="rent">Rent</option>
+                            <option value="transportation">Transportation</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </td>
+                    <td>
+                        <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold px-6 py-2 h-12 rounded gap-3" type="submit">Add</button>
+                    </td>
+                </tbody>
+            </table>
+
+
+            
+          </form>
+        </section>
+          
+        <section class='container mx-auto my-12'>  
+            <div class="m-10 font-bold flex justify-start gap-8">
+                <h1 class="text-2xl font-bold">Expenses</h1> 
+                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 128 128"><path fill="#fcc21b" d="M68.43 5.38c.89-1.95 2.55-2.5 3.93-2.56c2.1-.1 4.3 1.35 6.37 3.06C80.2 7.54 81.96 8.82 84 9.72c1.41.5 2.81.6 4.23.53c2-.1 4.03-.54 6.04-.64l.11-.01l.91-.08c2.3-.11 4.47.43 6.53 1.62c1.89 1.72 2.72 3.86 2.46 6.44c-.44 2.13-.06 4.08 1.13 5.85c2.05 1.44 4.2 2.7 6.46 3.77c2.34 1.28 3.81 3.21 4.45 5.78c.23 2.72-1.03 4.46-3.75 5.21c-3.54.89-8.3.89-12.31 3.99c-5.86 4.89-7.7 9.82-10.25 10.57c-1.25-1.42-9.05-7.45-22.13-10.34c-2.34-8.07-3.76-27.55.55-37.03z"/><path fill="#d19b15" d="M81.63 40.69c2.3-4.6 8.85-12.69 10.42-11.09c1.55 1.74-2.02 10.78-4.53 15.21c-.89-.94-3.76-2.91-5.01-3.24"/><path fill="#8d6e63" d="M93.2 55.42c-1.35 0-2.67-.69-3.42-1.93c-6.88-11.32-22.46-10.13-22.61-10.11c-2.2.18-4.14-1.44-4.33-3.63a4.006 4.006 0 0 1 3.61-4.34c.84-.08 20.67-1.71 30.17 13.94c1.15 1.89.54 4.35-1.34 5.49c-.66.39-1.37.58-2.08.58z"/><path fill="#fcc21b" d="M96.06 122.07c-17.13 4.22-40.94 3.92-57.95.56C22.19 119.48 10 110.09 11.4 91.61c1.42-18.7 13.81-36.31 30.85-44.07c16.49-7.51 38.62-11.17 50.28 5.87c2.9 4.24 8.44 13.65 8.7 18.27c.02.37.04.7.12 1.02c.02 1.16.49 2.33 1.63 3.19c7.33 5.55 12.67 12.91 13.65 23c1.16 12.03-10.22 20.63-20.57 23.18z"/><path fill="#424242" d="M80.87 91.13c-2.08-3.38-5.91-7.05-9.53-10.2l2.81-7.78c2.5 1.95 4.7 3.78 6.42 5.36c.28.27.72.29 1.04.06l6.44-4.79c.18-.14.29-.34.32-.57a.8.8 0 0 0-.21-.62c-1.91-2.13-6.05-5.86-10.58-8.93l1.65-4.56c.19-.52-.07-1.09-.6-1.29l-7.57-2.74c-.52-.19-1.1.08-1.29.6l-1.23 3.41c-7.13-2.21-12.79-1.5-17.23 2.21c-3.48 2.92-4.98 7.09-3.92 10.87c1.08 4.03 4.24 6.79 8.24 10.28l.51.45c.93.8 1.92 1.63 2.89 2.46l-3.42 9.46c-4.49-2.94-8.25-7.01-8.89-7.9a.806.806 0 0 0-1.08-.21l-7.42 4.74c-.18.11-.31.3-.36.52c-.04.21 0 .43.12.61c2.23 3.36 5.88 7.12 9.77 10.06c.93.7 2.33 1.68 4.05 2.71l-1.29 3.55c-.18.52.08 1.09.6 1.28l7.58 2.75c.52.19 1.1-.08 1.29-.6l1.07-2.96c6.92 1.88 13 .79 17.7-3.23c4.54-3.89 5.32-9.35 2.12-15zM65.18 68.4l-2.07 5.73c-1.93-1.5-2.96-2.63-2.23-4.25c.76-1.66 2.65-1.77 4.3-1.48zm2.05 23.9c1.33 1.29 2.27 2.48 2.36 3.57c.04.62-.19 1.22-.73 1.84c-.94 1.09-2.44 1.3-3.99 1.11l2.36-6.52z"/></svg>
+            </div>
+        
+
+          <div class="shadow-lg p-6 rounded-lg overflow-x-auto table-responsive ">
+            <table class="table align-items-center ">
+              <thead class="thead-light">
+                <tr class="bg-gray-200 text-gray-700 uppercase text-xs sm:text-sm">
+                  <th scope="col" class="text-center">Name</th>
+                  <th scope="col" class="text-center">Amount</th>
+                  <th scope="col" class="text-center">Date</th>
+                  <th scope="col"class="text-center">Category</th>
+                  <th scope="col" class="text-center">Edit / Delete</th>
+                </tr>
+              </thead>
+              <tbody class="list">
+                {% for expense in expenses %}
+                <tr class="text-gray-700 text-sm">
+                  <td class="text-center">{{ expense.name }}</td>
+                  <td class="text-center">£{{ expense.amount|intcomma }} </td>
+                  <td class="text-center">{{ expense.date }}</td>
+                  <td class="text-center">{{ expense.category }}</td>
+                  <td class="p-2 flex justify-evenly">
+                    <a href="{% url 'edit' expense.id %}">
+                        <svg class="text-sky-500 w-5" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="M5 23.7q-.825 0-1.413-.587T3 21.7v-14q0-.825.588-1.413T5 5.7h8.925l-2 2H5v14h14v-6.95l2-2v8.95q0 .825-.588 1.413T19 23.7H5Zm7-9Zm4.175-8.425l1.425 1.4l-6.6 6.6V15.7h1.4l6.625-6.625l1.425 1.4l-7.2 7.225H9v-4.25l7.175-7.175Zm4.275 4.2l-4.275-4.2l2.5-2.5q.6-.6 1.438-.6t1.412.6l1.4 1.425q.575.575.575 1.4T22.925 8l-2.475 2.475Z"/></svg>
+                    </a>
+                    <form method="post" action="{% url 'delete' expense.id %}">
+                        {% csrf_token %}
+                        <button type="submit" name="delete">
+                            <svg class="text-red-400 w-6" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="M7 21q-.825 0-1.413-.588T5 19V6H4V4h5V3h6v1h5v2h-1v13q0 .825-.588 1.413T17 21H7ZM17 6H7v13h10V6ZM9 17h2V8H9v9Zm4 0h2V8h-2v9ZM7 6v13V6Z"/></svg>
+                        </button>
+                      </form>
+                  </td>
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+            
+            <!--Displaying total-->
+            <div class="text-right px-6 py-3">
+              <span class="font-bold text-green-500">
+                Total : £ {{ total_expenses.amount__sum|intcomma }}
+              </span>
+            </div>
+            <!--Displaying total-->
+          </div>
+          
+        </section>
+        
+        <section class='container mx-auto my-12'>
+            <div class="flex justify-center gap-12 px-6">
+                <div style="width: 18rem;">
+    
+                    <div class="card card-stats mb-4 mb-lg-0">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col">
+                                    <h5 class="card-title text-uppercase text-muted mb-0">Total Year</h5>
+                                    <span class="h2 font-weight-bold mb-0">£ {{ yearly_sum.amount__sum|intcomma }}</span>
+                                </div>
+                                <div class="col-auto">
+                                  <div class="icon icon-shape bg-gradient-red text-white rounded-circle shadow">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="currentColor" d="M12 14q-.425 0-.713-.288T11 13q0-.425.288-.713T12 12q.425 0 .713.288T13 13q0 .425-.288.713T12 14Zm-4 0q-.425 0-.713-.288T7 13q0-.425.288-.713T8 12q.425 0 .713.288T9 13q0 .425-.288.713T8 14Zm8 0q-.425 0-.713-.288T15 13q0-.425.288-.713T16 12q.425 0 .713.288T17 13q0 .425-.288.713T16 14Zm-4 4q-.425 0-.713-.288T11 17q0-.425.288-.713T12 16q.425 0 .713.288T13 17q0 .425-.288.713T12 18Zm-4 0q-.425 0-.713-.288T7 17q0-.425.288-.713T8 16q.425 0 .713.288T9 17q0 .425-.288.713T8 18Zm8 0q-.425 0-.713-.288T15 17q0-.425.288-.713T16 16q.425 0 .713.288T17 17q0 .425-.288.713T16 18ZM5 22q-.825 0-1.413-.588T3 20V6q0-.825.588-1.413T5 4h1V2h2v2h8V2h2v2h1q.825 0 1.413.588T21 6v14q0 .825-.588 1.413T19 22H5Zm0-2h14V10H5v10Z"/></svg>
+                                  </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    
+                </div>
+                <div style="width: 18rem;">
+    
+                    <div class="card card-stats mb-4 mb-lg-0">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col">
+                                    <h5 class="card-title text-uppercase text-muted mb-0">Total Month</h5>
+                                    <span class="h2 font-weight-bold mb-0">£ {{ monthly_sum.amount__sum|intcomma }}</span>
+                                </div>
+                                <div class="col-auto">
+                                  <div class="icon icon-shape bg-gradient-orange text-white rounded-circle shadow">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="currentColor" d="M12 14q-.425 0-.713-.288T11 13q0-.425.288-.713T12 12q.425 0 .713.288T13 13q0 .425-.288.713T12 14Zm-4 0q-.425 0-.713-.288T7 13q0-.425.288-.713T8 12q.425 0 .713.288T9 13q0 .425-.288.713T8 14Zm8 0q-.425 0-.713-.288T15 13q0-.425.288-.713T16 12q.425 0 .713.288T17 13q0 .425-.288.713T16 14Zm-4 4q-.425 0-.713-.288T11 17q0-.425.288-.713T12 16q.425 0 .713.288T13 17q0 .425-.288.713T12 18Zm-4 0q-.425 0-.713-.288T7 17q0-.425.288-.713T8 16q.425 0 .713.288T9 17q0 .425-.288.713T8 18Zm8 0q-.425 0-.713-.288T15 17q0-.425.288-.713T16 16q.425 0 .713.288T17 17q0 .425-.288.713T16 18ZM5 22q-.825 0-1.413-.588T3 20V6q0-.825.588-1.413T5 4h1V2h2v2h8V2h2v2h1q.825 0 1.413.588T21 6v14q0 .825-.588 1.413T19 22H5Zm0-2h14V10H5v10Z"/></svg>
+                                  </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    
+                </div>
+                <div style="width: 18rem;">
+    
+                    <div class="card card-stats mb-4 mb-lg-0">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col">
+                                    <h5 class="card-title text-uppercase text-muted mb-0">Total Week</h5>
+                                    <span class="h2 font-weight-bold mb-0">£ {{ weekly_sum.amount__sum|intcomma }}</span>
+                                </div>
+                                <div class="col-auto">
+                                  <div class="icon icon-shape bg-gradient-green text-white rounded-circle shadow">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="currentColor" d="M12 14q-.425 0-.713-.288T11 13q0-.425.288-.713T12 12q.425 0 .713.288T13 13q0 .425-.288.713T12 14Zm-4 0q-.425 0-.713-.288T7 13q0-.425.288-.713T8 12q.425 0 .713.288T9 13q0 .425-.288.713T8 14Zm8 0q-.425 0-.713-.288T15 13q0-.425.288-.713T16 12q.425 0 .713.288T17 13q0 .425-.288.713T16 14Zm-4 4q-.425 0-.713-.288T11 17q0-.425.288-.713T12 16q.425 0 .713.288T13 17q0 .425-.288.713T12 18Zm-4 0q-.425 0-.713-.288T7 17q0-.425.288-.713T8 16q.425 0 .713.288T9 17q0 .425-.288.713T8 18Zm8 0q-.425 0-.713-.288T15 17q0-.425.288-.713T16 16q.425 0 .713.288T17 17q0 .425-.288.713T16 18ZM5 22q-.825 0-1.413-.588T3 20V6q0-.825.588-1.413T5 4h1V2h2v2h8V2h2v2h1q.825 0 1.413.588T21 6v14q0 .825-.588 1.413T19 22H5Zm0-2h14V10H5v10Z"/></svg>
+                                  </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    
+                </div>
+                
+            </div>
+        </section>
+    
+        <section class="container mx-auto my-12">
+            <div class="row gap-6 justify-center">
+                <div class="col-xl-5 ">
+                    <div class="card">
+                    <div class="card-header border-0">
+                        <div class="row align-items-center">
+                        <div class="col">
+                            <h3 class="mb-0">Past 30 days expenses</h3>
+                        </div>
+                        </div>
+                    </div>
+                        <div class="table-responsive">
+                            <!-- Projects table -->
+                            <table class="table align-items-center table-flush">
+                            <thead class="thead-light">
+                                <tr>
+                                <th scope="col">Date</th>
+                                <th scope="col">Amount</th>
+                                </tr>
+                            </thead>
+                            {% for daily_sum in daily_sums %}
+                            <tbody>
+                                <tr>
+                                <th scope="row">
+                                    {{daily_sum.date}}
+                                </th>
+                                <td>
+                                    £ {{daily_sum.sum}}
+                                </td>
+                                </tr>
+                            
+                            </tbody>
+                            {% endfor %}
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-5 ">
+                <div class="card">
+                  <div class="card-header border-0">
+                    <div class="row align-items-center">
+                      <div class="col">
+                        <h3 class="mb-0">Categorical expenses</h3>
+                      </div>
+                    </div>
+                  </div>
+                    <div class="table-responsive">
+                        <!-- Projects table -->
+                        <table class="table align-items-center table-flush">
+                        <thead class="thead-light">
+                            <tr>
+                            <th scope="col">Category</th>
+                            <th scope="col">Amount</th>
+                            </tr>
+                        </thead>
+                        {% for categorical_sum in categorical_sums %}
+                        <tbody>
+                            <tr>
+                            <th scope="row">
+                                {{categorical_sum.category}}
+                            </th>
+                            <td>
+                                £ {{categorical_sum.sum}}
+                            </td>
+                            </tr>
+                            
+                        </tbody>
+                        {% endfor %}
+                        </table>
+                    </div>
+                </div>
+              </div>
+              </div>
+        </section>
+        
+    </div>
+    
+    
+    
+    <section class='container mx-auto my-12'>
+        <div class="flex flex-col md:flex-row gap-4">
+            <div class="md:w-1/2 shadow-lg">
+                <h1 class="m-10">Expense spread across categories</h1>
+                <canvas id="myChart" class="m-10"></canvas>
+            </div>
+            <div class="md:w-1/2 shadow-lg">
+                <h1 class="m-10">Daily Expense Sum</h1>
+                <canvas id="myChart1" class="m-10"></canvas>
+            </div>
+        </div>
+    </section>
+    
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.0.2/dist/chart.min.js"></script>
+
+    <script>
+
+        const cats = []
+        const cat_sums=[]
+
+        const dates=[]
+        const sums=[]
+        
+        {% for categorical_sum in categorical_sums %}
+            cats.push("{{categorical_sum.category}}")
+            cat_sums.push("{{categorical_sum.sum}}")
+        {% endfor %}
+
+        {% for daily_sum in daily_sums %}
+            dates.push("{{daily_sum.date}}")
+            sums.push("{{daily_sum.sum}}")
+        {% endfor %}
+        
+
+var ctx = document.getElementById('myChart').getContext('2d');
+var myChart = new Chart(ctx, {
+    type: 'doughnut',
+    data: {
+        labels: cats,
+        datasets: [{
+            label: 'Expense across categories',
+            data: cat_sums,
+            backgroundColor: [
+            'rgba(255, 0, 0, 0.8)',
+            'rgba(161, 255, 10, 0.8)',
+            'rgba(255, 135, 0, 0.8)',
+            'rgba(88, 10, 255, 0.8)',
+            'rgba(255, 211, 0, 0.8)',
+            'rgba(10, 239, 255, 0.8)',
+            'rgba(190, 10, 255, 0.8)',
+            'rgba(222, 255, 10, 0.8)',
+            'rgba(10, 255, 153, 0.8)',
+            'rgba(20, 125, 245, 0.8)',
+            ],
+        }]
+    },
+    options: {
+        scales: {
+            y: {
+                beginAtZero: true
+            }
+        },
+        responsive: true,
+        legend: {
+            position: 'bottom',
+            labels: {
+                fontColor: '#333',
+                fontSize: 12,
+                usePointStyle: true,
+                padding: 20
+            }
+        },
+        animation: {
+            animateScale: true,
+            animateRotate: true
+        },
+    }
+});
+
+
+console.log(dates)
+console.log(sums)
+var ctx1 = document.getElementById('myChart1').getContext('2d');
+var myChart1 = new Chart(ctx1, {
+    type: 'bar',
+    data: {
+        labels: dates,
+        datasets: [{
+            label: 'Sum of daily expenses',
+            data: sums,
+            backgroundColor: [
+                'rgba(255, 99, 132, 1)',
+                'rgba(54, 162, 235, 1)',
+                'rgba(255, 206, 86, 1)',
+                'rgba(75, 192, 192, 1)',
+                'rgba(153, 102, 255, 1)',
+                'rgba(255, 159, 64, 1)'
+            ]
+        }]
+    },
+    options: {
+        scales: {
+            y: {
+                beginAtZero: true
+            }
+        },
+        responsive: true,
+        legend: {
+            position: 'bottom',
+            labels: {
+                fontColor: '#333',
+                fontSize: 12,
+                usePointStyle: true,
+                padding: 20
+            }
+        },
+        animation: {
+            animateScale: true,
+            animateRotate: true
+        },
+    }
+});
+
+    </script>
+
+{% endblock %}

@@ -1,0 +1,93 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/argon-dashboard-django/1.0.2/css/argon.min.css" integrity="sha512-BPJelwJrk9oBQO+Qa2c1R0fDu5GYvjrC+cQFUAd0Tgw6tPsbJoDkank5CDgvZHa4XetwWXYNajo6Wzv1hWp+Ww==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <title>Document</title>
+  </head>
+  <body>
+    <header>
+      <nav
+         class="
+           flex flex-wrap
+           items-center
+           justify-between
+           w-full
+           py-4
+           md:py-0
+           px-4
+           text-lg text-gray-700
+           bg-gradient-green
+         "
+       >
+        <div>
+          <a
+          class="md:p-4 py-2 block"
+          href="{% url 'index' %}"
+          ><h1 class="font-bold">Expense Tracker</h1></a
+        >
+         </div>
+        
+          <svg
+             xmlns="http://www.w3.org/2000/svg"
+             id="menu-button"
+             class="h-6 w-6 cursor-pointer md:hidden block"
+             fill="none"
+             viewBox="0 0 24 24"
+             stroke="currentColor"
+           >
+             <path
+               stroke-linecap="round"
+               stroke-linejoin="round"
+               stroke-width="2"
+               d="M4 6h16M4 12h16M4 18h16"
+             />
+           </svg>
+        
+        <div class="hidden w-full md:flex md:items-center md:w-auto" id="menu">
+           <ul
+             class="
+               pt-4
+               text-base text-gray-700
+               md:flex
+               md:justify-between 
+               md:pt-0"
+           >
+             <li>
+               <a class="md:p-4 py-2 block font-bold hover:text-rose-500" href="https://brett.vercel.app"
+                 >About</a
+               >
+             </li>
+              <li>
+                <a class="md:p-4 py-2 block hover:text-rose-500" href="#"
+                  ><svg xmlns="http://www.w3.org/2000/svg" width="25" height="24" viewBox="0 0 1227.825 1000"><path fill="currentColor" d="M1078.94-.985c-33.192-.491-110.295 10.777-239.027 96.936c-70.161-17.535-144.812-26.188-219.591-26.188c-82.278 0-165.425 10.448-242.965 31.719C192.534-24.605 110.955 1.234 110.955 1.234c-53.258 133.183-20.347 231.788-10.344 256.277C38.014 325.069-.2 411.338-.2 517.07c0 79.822 9.085 151.416 31.281 213.653c1.231 4.803.832 3.732 2.906 7.844c4.89 12.884 10.327 25.39 16.438 37.468c2.094 4.346 4 7.563 4 7.563c62.395 116.307 185.396 191.438 404.244 215.028l330.995.375c233.392-23.144 345.386-98.499 396.994-215.591l3.281-7.625c4.89-11.828 9.153-24.135 20.813-65.562c11.659-41.427 16.875-113.172 16.875-193.185c0-114.755-43.1-206.577-113.092-276.434c12.231-39.48 28.57-127.158-16.313-239.402c0 0-6.293-1.995-19.281-2.188zM818.1 420.133c53.893-.117 100.057 9.136 134.717 45.499v.031c43.369 45.541 68.749 100.525 68.749 159.778c0 276.658-177.932 284.183-397.4 284.183c-219.506 0-397.4-38.336-397.4-284.183c0-58.861 25.009-113.516 67.843-158.872c71.451-75.59 192.365-35.562 329.558-35.562c70.423-.011 136.564-10.75 193.935-10.875zm-408.807 81.468c-45.666 0-82.687 61.741-82.687 137.936c0 76.206 37.019 137.967 82.687 137.967c45.666 0 82.687-61.761 82.687-137.967c0-76.184-37.019-137.881-82.687-137.936zm443.649 0c-45.666 0-82.687 61.741-82.687 137.936c0 76.206 37.019 137.967 82.687 137.967c45.666 0 82.687-61.761 82.687-137.967c0-76.184-37.019-137.881-82.687-137.936z"/></svg></a
+                >
+              </li>
+              <li>
+                <a class="md:p-4 py-2 block hover:text-rose-500" href="https://www.linkedin.com/in/norbert-brett/"
+                  ><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 1000 1000"><path fill="currentColor" d="M196.064.25C88.347.25.187 88.408.187 196.127v607.841c0 107.717 88.158 195.845 195.877 195.845h607.841c107.718 0 195.845-88.127 195.845-195.845V196.127C999.75 88.41 911.623.25 803.905.25H196.064zm49.266 164.948c51.648 0 83.461 33.906 84.443 78.475c0 43.585-32.797 78.444-85.442 78.444h-.969c-50.665 0-83.412-34.857-83.412-78.444c0-44.568 33.738-78.475 85.379-78.475zm445.08 208.31c99.329 0 173.79 64.922 173.79 204.436v260.449H713.247V595.406c0-61.06-21.847-102.718-76.476-102.718c-41.704 0-66.562 28.078-77.476 55.202c-3.987 9.704-4.967 23.257-4.967 36.832v253.671H403.375s1.981-411.613 0-454.233h150.984v64.324c20.06-30.95 55.942-74.977 136.051-74.977zm-521.556 10.685h150.953v454.202H168.854V384.193z"/></svg></a
+                >
+              </li>
+             
+           </ul>
+         </div>
+     </nav>
+   </header>
+    {% block body %} {% endblock %}
+
+    <script>
+      const menuBtn = document.getElementById("menu-button");
+      const menu = document.getElementById("menu");
+
+      menuBtn.addEventListener("click", () => {
+        menu.classList.toggle("hidden");
+      });
+    </script>
+  </body>
+
+</html>
